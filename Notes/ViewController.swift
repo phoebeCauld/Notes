@@ -9,12 +9,13 @@ import UIKit
 import CoreData
 class ViewController: UIViewController {
     
-    let notesViewConfiguration = ListView()
-    var notes = [Notes]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let notesViewConfiguration = ListView()
+    private var notes = [Notes]()
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        notesViewConfiguration.searchBar.searchBar.delegate = self
         notesViewConfiguration.setView(view)
         setNavBar()
         setTableView()
@@ -23,14 +24,14 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         loadNotes()
-        notesViewConfiguration.notesTableView.reloadData()
     }
+    
     
     func setNavBar(){
         navigationItem.title = "Заметки"
-        navigationController?.navigationBar.barStyle = .black
+//        navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationItem.searchController = notesViewConfiguration.searchBar
+        navigationItem.searchController = notesViewConfiguration.searchBar
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont.systemFont(ofSize: 25, weight: .black)]
@@ -49,14 +50,14 @@ class ViewController: UIViewController {
     
 // MARK: - CoreData methods
     
-    func loadNotes(){
-        let request: NSFetchRequest<Notes> = Notes.fetchRequest()
+    func loadNotes(with request: NSFetchRequest<Notes> = Notes.fetchRequest(), predicate: NSPredicate? = nil){
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         do {
             notes = try context.fetch(request)
         } catch {
             print("Failed with loading data \(error.localizedDescription)")
         }
+        notesViewConfiguration.notesTableView.reloadData()
     }
     
     func saveNotes(){
@@ -75,6 +76,7 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - DataSourse and Delegate methods
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,34 +84,37 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
-            cell.textLabel?.text = notes[indexPath.row].text
-            cell.backgroundColor = .black
-            cell.textLabel?.textColor = .white
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! CustomCell
+        if let date = notes[indexPath.row].date{
+            let dateAsString = DateFormatter()
+            dateAsString.dateFormat = "dd/MM/yyyy"
+            cell.noteLabel.text = notes[indexPath.row].text
+            cell.dateLabel.text = dateAsString.string(from: date)
+        }
+
+//        cell.dateLabel.text = currentNote.value(forKey: "date") as? String
+//        cell.noteLabel.text = notes[indexPath.row].text
+        cell.backgroundColor = .black
+        cell.textLabel?.textColor = .white
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let currentNote = notes[indexPath.row]
         let selectedNoteVC = SelectedNotesViewController(selectedNote: currentNote)
-        selectedNoteVC.completion = { [weak self] text in
+        selectedNoteVC.completion = { [weak self] text, date in
             DispatchQueue.main.async {
                 do {
                     selectedNoteVC.selectedNote?.setValue(text, forKey: "text")
+                    selectedNoteVC.selectedNote?.setValue(date, forKey: "date")
                     self?.notesViewConfiguration.notesTableView.reloadData()
                     try self?.context.save()
-                    print("update text")
                 } catch {
                     print("failed with \(error.localizedDescription)")
                 }
             }
         }
-//        if let selectedNotesText = currentNote.text {
-//            selectedNoteVC.text = selectedNotesText
-//            selectedNoteVC.selectedNote = currentNote
-//            selectedNoteVC.selectedNotes.textView.text = selectedNotesText
-//        }
         navigationController?.pushViewController(selectedNoteVC, animated: true)
         
     }
@@ -124,6 +129,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         saveNotes()
         tableView.reloadData()
     }
-   
-    
 }
+
+

@@ -10,13 +10,15 @@ import CoreData
 
 class NotesViewController: UIViewController {
     
-    let configurations = NotesView()
-    var textNote = [Notes]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let configurations = NotesView()
+    private var textNote = [Notes]()
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
     override func viewDidLoad() {
         super.viewDidLoad()
         configurations.setView(view)
+        configurations.textView.becomeFirstResponder()
+        setTextView()
         setNavBar()
     }
 
@@ -29,11 +31,11 @@ class NotesViewController: UIViewController {
         doneButton.isEnabled = false
         doneButton.tintColor = .clear
     }
-    
     func showDoneButton(){
         doneButton.isEnabled = true
         doneButton.tintColor = .white
     }
+    
     func setTextView(){
         configurations.textView.delegate = self
     }
@@ -59,7 +61,7 @@ class NotesViewController: UIViewController {
 
 
 extension NotesViewController: UITextViewDelegate {
-    func textViewDidEndEditing(_ textView: UITextView) {
-        
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        showDoneButton()
     }
 }

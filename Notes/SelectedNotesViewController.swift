@@ -8,9 +8,9 @@
 import UIKit
 import CoreData
 class SelectedNotesViewController: UIViewController {
-    public var completion: ((String?) -> Void)?
+    public var completion: ((String?, Date?) -> Void)?
     var selectedNote: NSManagedObject?
-
+    
     init(selectedNote: NSManagedObject) {
         self.selectedNote = selectedNote
         super.init(nibName: nil, bundle: nil)
@@ -56,18 +56,20 @@ class SelectedNotesViewController: UIViewController {
     
     
     @objc func doneButtonPressed(){
+        let date = Date()
         guard let text = selectedNotes.textView.text, selectedNotes.textView.hasText else {
             hideDoneButton()
             selectedNotes.textView.endEditing(true)
-            return editText("")
+            // NEED TO CHANGE DATE TO SAME IF TEXT NOT CHANGED
+            return editText("", date)
         }
-        editText(text)
+        editText(text, date)
         selectedNotes.textView.endEditing(true)
         hideDoneButton()
     }
     
-    func editText(_ text: String){
-        completion?(text)
+    func editText(_ text: String, _ date: Date){
+        completion?(text, date)
     }
 }
 
