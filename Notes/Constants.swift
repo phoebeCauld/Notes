@@ -9,5 +9,4 @@ import Foundation
 
 struct K {
     static let cellIdentifier = "notesListCell"
-    static let customCellIdentifier = "searchBarCell"
 }

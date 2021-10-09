@@ -66,5 +66,4 @@ class CustomCell: UITableViewCell {
             cellView.heightAnchor.constraint(greaterThanOrEqualToConstant: 70)
         ])
     }
-
 }

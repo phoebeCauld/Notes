@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     func setNavBar(){
         navigationItem.title = "Заметки"
-//        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = notesViewConfiguration.searchBar
         let navBarAppearance = UINavigationBarAppearance()
@@ -91,9 +91,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.noteLabel.text = notes[indexPath.row].text
             cell.dateLabel.text = dateAsString.string(from: date)
         }
-
-//        cell.dateLabel.text = currentNote.value(forKey: "date") as? String
-//        cell.noteLabel.text = notes[indexPath.row].text
         cell.backgroundColor = .black
         cell.textLabel?.textColor = .white
         return cell

@@ -59,7 +59,6 @@ class NotesViewController: UIViewController {
     }
 }
 
-
 extension NotesViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         showDoneButton()

@@ -53,8 +53,7 @@ class SelectedNotesViewController: UIViewController {
         doneButton.isEnabled = true
         doneButton.tintColor = .white
     }
-    
-    
+// MARK: - Action Meethods
     @objc func doneButtonPressed(){
         let date = Date()
         guard let text = selectedNotes.textView.text, selectedNotes.textView.hasText else {
