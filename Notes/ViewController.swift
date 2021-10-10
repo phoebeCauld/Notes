@@ -121,6 +121,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         context.delete(notes[indexPath.row])
         notes.remove(at: indexPath.row)
         saveNotes()

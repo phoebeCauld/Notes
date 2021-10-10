@@ -26,7 +26,7 @@ class SelectedNotesViewController: UIViewController {
     
     private let selectedNotes = SelectedNotesView()
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
+    private let doneButton = DoneButton(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,30 +41,21 @@ class SelectedNotesViewController: UIViewController {
     }
     func setupNavBar(){
         navigationItem.rightBarButtonItem = doneButton
-        hideDoneButton()
+        doneButton.hideDoneButton()
     }
     
-    func hideDoneButton(){
-        doneButton.isEnabled = false
-        doneButton.tintColor = .clear
-    }
-    
-    func showDoneButton(){
-        doneButton.isEnabled = true
-        doneButton.tintColor = .white
-    }
 // MARK: - Action Meethods
     @objc func doneButtonPressed(){
         let date = Date()
         guard let text = selectedNotes.textView.text, selectedNotes.textView.hasText else {
-            hideDoneButton()
+            doneButton.hideDoneButton()
             selectedNotes.textView.endEditing(true)
             // NEED TO CHANGE DATE TO SAME IF TEXT NOT CHANGED
             return editText("", date)
         }
         editText(text, date)
         selectedNotes.textView.endEditing(true)
-        hideDoneButton()
+        doneButton.hideDoneButton()
     }
     
     func editText(_ text: String, _ date: Date){
@@ -74,6 +65,6 @@ class SelectedNotesViewController: UIViewController {
 
 extension SelectedNotesViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        showDoneButton()
+        doneButton.showDoneButton()
     }
 }
