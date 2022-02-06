@@ -18,8 +18,6 @@
 		2DBCD86D27105B32007D2806 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCD86C27105B32007D2806 /* Constants.swift */; };
 		2DBCD8722710733B007D2806 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCD8712710733B007D2806 /* NotesViewController.swift */; };
 		2DBCD87427107389007D2806 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCD87327107389007D2806 /* NotesView.swift */; };
-		2DBCD87627108C41007D2806 /* SelectedNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCD87527108C41007D2806 /* SelectedNotesViewController.swift */; };
-		2DBCD87827108C60007D2806 /* SelectedNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCD87727108C60007D2806 /* SelectedNotesView.swift */; };
 		2DBCD87A2710B5CB007D2806 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCD8792710B5CB007D2806 /* CustomCell.swift */; };
 		2DBCD87D2710E88C007D2806 /* SearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCD87C2710E88C007D2806 /* SearchBarExtension.swift */; };
 		2DBCD87F271347E9007D2806 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCD87E271347E9007D2806 /* DoneButton.swift */; };
@@ -42,8 +40,6 @@
 		2DBCD86C27105B32007D2806 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2DBCD8712710733B007D2806 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		2DBCD87327107389007D2806 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
-		2DBCD87527108C41007D2806 /* SelectedNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNotesViewController.swift; sourceTree = "<group>"; };
-		2DBCD87727108C60007D2806 /* SelectedNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNotesView.swift; sourceTree = "<group>"; };
 		2DBCD8792710B5CB007D2806 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		2DBCD87C2710E88C007D2806 /* SearchBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarExtension.swift; sourceTree = "<group>"; };
 		2DBCD87E271347E9007D2806 /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
@@ -85,47 +81,45 @@
 			children = (
 				2DBCD8522710552B007D2806 /* AppDelegate.swift */,
 				2DBCD8542710552B007D2806 /* SceneDelegate.swift */,
-				2DBCD87B2710D31B007D2806 /* Model */,
-				2DBCD869271058B6007D2806 /* View */,
-				2DBCD87027107304007D2806 /* Controller */,
+				2DC2FED027B067D300A7C12A /* AllNotes */,
+				2DBCD87B2710D31B007D2806 /* CoreDataModel */,
+				2DBCD87027107304007D2806 /* NotesEditor */,
 				2DBCD85E2710552D007D2806 /* Assets.xcassets */,
 				2DBCD86C27105B32007D2806 /* Constants.swift */,
+				2DBCD8582710552B007D2806 /* Main.storyboard */,
 				2DBCD8602710552D007D2806 /* LaunchScreen.storyboard */,
 				2DBCD8632710552D007D2806 /* Info.plist */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
 		};
-		2DBCD869271058B6007D2806 /* View */ = {
+		2DBCD87027107304007D2806 /* NotesEditor */ = {
 			isa = PBXGroup;
 			children = (
-				2DBCD86A27105910007D2806 /* ListView.swift */,
+				2DBCD8712710733B007D2806 /* NotesViewController.swift */,
 				2DBCD87327107389007D2806 /* NotesView.swift */,
 				2DBCD87E271347E9007D2806 /* DoneButton.swift */,
-				2DBCD87727108C60007D2806 /* SelectedNotesView.swift */,
-				2DBCD8792710B5CB007D2806 /* CustomCell.swift */,
-				2DBCD8582710552B007D2806 /* Main.storyboard */,
 			);
-			path = View;
+			name = NotesEditor;
 			sourceTree = "<group>";
 		};
-		2DBCD87027107304007D2806 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2DBCD8562710552B007D2806 /* ViewController.swift */,
-				2DBCD87C2710E88C007D2806 /* SearchBarExtension.swift */,
-				2DBCD8712710733B007D2806 /* NotesViewController.swift */,
-				2DBCD87527108C41007D2806 /* SelectedNotesViewController.swift */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		2DBCD87B2710D31B007D2806 /* Model */ = {
+		2DBCD87B2710D31B007D2806 /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
 				2DBCD85B2710552B007D2806 /* Notes.xcdatamodeld */,
 			);
-			path = Model;
+			path = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		2DC2FED027B067D300A7C12A /* AllNotes */ = {
+			isa = PBXGroup;
+			children = (
+				2DBCD86A27105910007D2806 /* ListView.swift */,
+				2DBCD8562710552B007D2806 /* ViewController.swift */,
+				2DBCD8792710B5CB007D2806 /* CustomCell.swift */,
+				2DBCD87C2710E88C007D2806 /* SearchBarExtension.swift */,
+			);
+			path = AllNotes;
 			sourceTree = "<group>";
 		};
 		A2A67E6E11400A793D5F7468 /* Frameworks */ = {
@@ -270,8 +264,6 @@
 				2DBCD87F271347E9007D2806 /* DoneButton.swift in Sources */,
 				2DBCD87427107389007D2806 /* NotesView.swift in Sources */,
 				2DBCD86D27105B32007D2806 /* Constants.swift in Sources */,
-				2DBCD87627108C41007D2806 /* SelectedNotesViewController.swift in Sources */,
-				2DBCD87827108C60007D2806 /* SelectedNotesView.swift in Sources */,
 				2DBCD87D2710E88C007D2806 /* SearchBarExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,7 +20,7 @@ class CustomCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
         label.font = UIFont.systemFont(ofSize: 20)
-        label.textColor = .white
+        label.textColor = .black
         return label
     }()
     
@@ -36,7 +36,7 @@ class CustomCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCellView(contentView)
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {

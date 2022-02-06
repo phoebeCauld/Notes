@@ -11,8 +11,8 @@ class NotesView: UIView {
 
     let textView: UITextView = {
         let textView = UITextView()
-        textView.textColor = .white
-        textView.backgroundColor = .black
+        textView.textColor = .black
+        textView.backgroundColor = .white
         textView.font = UIFont.systemFont(ofSize: 20)
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView

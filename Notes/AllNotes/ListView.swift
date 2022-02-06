@@ -11,7 +11,7 @@ class ListView: UIView {
 
     let notesTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.register(CustomCell.self, forCellReuseIdentifier: K.cellIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false

@@ -15,15 +15,15 @@ extension ViewController: UISearchBarDelegate {
         let predicate = NSPredicate(format: "text CONTAINS[cd] %@", text)
         request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(key: "text", ascending: true)]
-        loadNotes(with: request, predicate: predicate)
+        self.loadNotes(with: request, predicate: predicate)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            loadNotes()
+            self.loadNotes()
         }
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        loadNotes()
+        self.loadNotes()
     }
 }
